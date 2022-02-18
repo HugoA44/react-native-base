@@ -8,6 +8,7 @@ import {useAuth} from '../contexts/AuthContext';
 import HomeScreen from '../screens/HomeScreen';
 import TabBar from './TabBar';
 import ProfileScreen from '../screens/ProfileScreen';
+import LinesScreen from '../screens/LinesScreen';
 
 const MainNavigator = createBottomTabNavigator();
 const AuthNavigator = createNativeStackNavigator();
@@ -38,8 +39,13 @@ function MainTabNavigator() {
         component={HomeScreen}
       />
       <MainNavigator.Screen
+        name="Lines"
+        options={{tabBarIcon: 'analytics'}}
+        component={LinesScreen}
+      />
+      <MainNavigator.Screen
         name="Profile"
-        options={{tabBarIcon: 'user'}}
+        options={{tabBarIcon: 'person'}}
         component={ProfileScreen}
       />
     </MainNavigator.Navigator>

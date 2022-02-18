@@ -1,12 +1,12 @@
-import React from 'react';
 import {StyleSheet} from 'react-native';
 import {colors} from './Theme';
 
 const tabBarStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 50,
+    height: 70,
     backgroundColor: colors.background,
+    paddingVertical: 10,
   },
   button: {
     flex: 1,
@@ -21,8 +21,16 @@ const tabBarStyle = StyleSheet.create({
   buttonTextSelected: {
     textAlign: 'center',
     color: colors.primary[500],
-    // fontWeight: 'bold',
   },
 });
 
-export {tabBarStyle};
+const loginStyle = StyleSheet.create({
+  input: {
+    marginVertical: 30,
+  },
+  button: {
+    marginVertical: 30,
+  },
+});
+
+export {tabBarStyle, loginStyle};

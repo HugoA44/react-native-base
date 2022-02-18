@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {tabBarStyle} from '../theme/Styles';
 
 function TabBar({state, descriptors, navigation}) {
@@ -50,7 +50,7 @@ function TabBar({state, descriptors, navigation}) {
             onLongPress={onLongPress}
             style={tabBarStyle.button}>
             <Icon
-              name={icon}
+              name={isFocused ? icon : icon + '-outline'}
               size={20}
               style={
                 isFocused

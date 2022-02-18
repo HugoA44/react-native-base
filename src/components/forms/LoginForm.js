@@ -3,11 +3,12 @@ import {
   Box,
   Button,
   FormControl,
-  Icon,
   Input,
   Text,
   WarningOutlineIcon,
 } from 'native-base';
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 function LoginForm({onLogin}) {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +34,7 @@ function LoginForm({onLogin}) {
               w="1/6"
               h="full"
               onPress={() => setShowPassword(!showPassword)}>
-              {showPassword ? 'Masquer' : 'Afficher'}
+              <Icon name={showPassword ? 'eye' : 'eye-off'} size={25} />
             </Button>
           }
         />

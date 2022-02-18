@@ -31,16 +31,19 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <AuthProvider>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <NavigationContainer theme={navigationTheme}>
-          <NativeBaseProvider theme={theme}>
-            <Navigator />
-          </NativeBaseProvider>
-        </NavigationContainer>
-      </AuthProvider>
-    </SafeAreaView>
+    <>
+      <SafeAreaView />
+      <SafeAreaView style={{flex: 1, backgroundColor: theme.colors.background}}>
+        <AuthProvider>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <NavigationContainer theme={navigationTheme}>
+            <NativeBaseProvider theme={theme}>
+              <Navigator />
+            </NativeBaseProvider>
+          </NavigationContainer>
+        </AuthProvider>
+      </SafeAreaView>
+    </>
   );
 };
 
