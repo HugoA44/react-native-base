@@ -15,6 +15,11 @@ function TabBar({state, descriptors, navigation}) {
             ? options.title
             : route.name;
 
+        // Si pas d'icône, on n'ajoute pas la page à la tabbar
+        if (!options.tabBarIcon) {
+          return null;
+        }
+
         const icon = options.tabBarIcon;
 
         const isFocused = state.index === index;
