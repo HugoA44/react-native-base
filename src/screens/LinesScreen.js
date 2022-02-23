@@ -17,7 +17,7 @@ function LinesScreen({navigation}) {
 
   return (
     <Container style={{maxWidth: '100%'}} h="100%" w="100%">
-      <MapView
+      {/* <MapView
         style={{
           width: '100%',
           height: '100%',
@@ -37,7 +37,7 @@ function LinesScreen({navigation}) {
         //   latitudeDelta: 0.0922,
         //   longitudeDelta: 0.0421,
         // }}
-      />
+      /> */}
       <Fab
         onPress={() => navigation.navigate('Modal')}
         position="absolute"

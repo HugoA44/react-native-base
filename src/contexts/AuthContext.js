@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useEffect, useReducer} from 'react';
-// import {login} from '../services/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {loginWithCredentials} from '../../services/api';
 
 const AuthContext = createContext();
 
@@ -39,8 +40,25 @@ const AuthReducer = (state, action) => {
 const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-  //   useEffect(() => {
-  //   }, [state]);
+  useEffect(() => {
+    const loadStorageState = async () => {
+      const storedState = await rehydrateAuth();
+      if (storedState) {
+        dispatch({
+          type: actionTypes.LOGIN,
+          data: {user: storedState.user, token: storedState.token},
+        });
+      }
+    };
+    loadStorageState();
+  }, []);
+
+  useEffect(() => {
+    const saveData = async () => {
+      await persistAuth(state);
+    };
+    saveData();
+  }, [state]);
 
   return (
     <AuthContext.Provider value={{state, dispatch}}>
@@ -57,22 +75,34 @@ const useAuth = () => {
 
 const loginUser = async (credentials, dispatch) => {
   try {
-    const data = {
-      token: 'TESTTOKENBIDON',
-      user: {
-        firstName: 'Toto',
-        lastName: 'Tata',
-      },
-    };
+    const data = await loginWithCredentials(credentials);
+
     dispatch({
       type: actionTypes.LOGIN,
-      data: {user: data.user, token: data.token},
+      data: {user: data.user, token: data.jwt},
     });
   } catch (error) {
     dispatch({
       type: actionTypes.ERROR,
       data: {error: error.message},
     });
+  }
+};
+
+const persistAuth = async data => {
+  try {
+    await AsyncStorage.setItem('AUTH', JSON.stringify(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const rehydrateAuth = async () => {
+  try {
+    const data = await AsyncStorage.getItem('AUTH');
+    return data ? JSON.parse(data) : null;
+  } catch (error) {
+    console.error(error);
   }
 };
 

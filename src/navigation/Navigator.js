@@ -60,7 +60,6 @@ function MainTabNavigator() {
 
 function Navigator() {
   const {state} = useAuth();
-  console.log(state);
 
   if (state.user && state.token) {
     return <MainTabNavigator />;

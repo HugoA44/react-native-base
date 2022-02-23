@@ -12,12 +12,23 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 function LoginForm({onLogin}) {
   const [showPassword, setShowPassword] = useState(false);
+  const [credentials, setCredentials] = useState({
+    identifier: 'hugo.aunette@my-digital-school.org',
+    password: 'azertyuiop',
+  });
 
   return (
     <Box w="80%">
       <FormControl mb="3">
         <FormControl.Label>Email</FormControl.Label>
-        <Input placeholder="Entrez votre email" type="email" />
+        <Input
+          placeholder="Entrez votre email"
+          type="email"
+          value={credentials.identifier}
+          onChangeText={text => {
+            setCredentials({...credentials, identifier: text});
+          }}
+        />
         <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon />}>
           Une erreurs s'est produite
         </FormControl.ErrorMessage>
@@ -27,6 +38,10 @@ function LoginForm({onLogin}) {
         <Input
           type={showPassword ? 'text' : 'password'}
           placeholder="Entrez votre mot de passe"
+          value={credentials.password}
+          onChangeText={text => {
+            setCredentials({...credentials, password: text});
+          }}
           InputRightElement={
             <Button
               size="xs"
@@ -42,7 +57,7 @@ function LoginForm({onLogin}) {
           Une erreurs s'est produite
         </FormControl.ErrorMessage>
       </FormControl>
-      <Button onPress={onLogin} size="md" mb="2">
+      <Button onPress={() => onLogin(credentials)} size="md" mb="2">
         Se connecter
       </Button>
     </Box>

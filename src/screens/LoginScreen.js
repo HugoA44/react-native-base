@@ -18,9 +18,11 @@ import {useColorScheme} from 'react-native';
 
 function LoginScreen({navigation}) {
   const isDarkMode = useColorScheme() === 'dark';
-  const {dispatch} = useAuth();
-  const handleLogin = () => {
-    loginUser({}, dispatch);
+
+  const {dispatch, state} = useAuth();
+
+  const handleLogin = async credentials => {
+    await loginUser(credentials, dispatch);
   };
 
   return (
